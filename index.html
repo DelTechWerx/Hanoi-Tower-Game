@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tower of Hanoi</title>
+    <title>Tower of Hanoi · High Scores</title>
     <style>
         :root {
             --bg: #1a1a2e;
@@ -27,8 +27,7 @@
 
         body {
             background: var(--bg);
-            background-image:
-                radial-gradient(ellipse at center, #1a1a3a 0%, #0d0d1a 100%);
+            background-image: radial-gradient(ellipse at center, #1a1a3a 0%, #0d0d1a 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,19 +42,16 @@
             background: var(--surface);
             border-radius: 24px;
             padding: 30px 25px 25px;
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.03);
             max-width: 700px;
             width: 100%;
+            position: relative;
         }
 
         .game-header {
             text-align: center;
             margin-bottom: 10px;
         }
-
         .game-title {
             font-size: 2rem;
             font-weight: 700;
@@ -64,7 +60,6 @@
             text-shadow: 0 2px 8px rgba(247, 215, 116, 0.3);
             margin-bottom: 4px;
         }
-
         .game-subtitle {
             font-size: 0.85rem;
             color: #aaa;
@@ -72,7 +67,6 @@
             text-transform: uppercase;
         }
 
-        /* Stats bar */
         .stats-bar {
             display: flex;
             align-items: center;
@@ -81,7 +75,6 @@
             margin-bottom: 18px;
             flex-wrap: wrap;
         }
-
         .stat-item {
             display: flex;
             align-items: center;
@@ -91,7 +84,6 @@
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
         .stat-icon {
             font-size: 1.3rem;
         }
@@ -112,19 +104,11 @@
         .stat-value.pulse {
             animation: pulseValue 0.35s ease;
         }
-
         @keyframes pulseValue {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            40% {
-                transform: scale(1.35);
-                color: #f7d774;
-            }
+            0%, 100% { transform: scale(1); }
+            40% { transform: scale(1.35); color: #f7d774; }
         }
 
-        /* Game area */
         .game-area {
             position: relative;
             display: flex;
@@ -134,8 +118,6 @@
             height: 320px;
             margin-bottom: 0;
         }
-
-        /* Base platform */
         .base-platform {
             position: absolute;
             bottom: 0;
@@ -144,13 +126,10 @@
             height: 18px;
             background: linear-gradient(180deg, #9b6040 0%, #6b3a2a 40%, #4a2218 100%);
             border-radius: 10px 10px 6px 6px;
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.5),
-                0 1px 2px rgba(255, 255, 255, 0.06) inset;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.06) inset;
             z-index: 2;
         }
 
-        /* Tower column */
         .tower {
             position: relative;
             width: 30%;
@@ -160,15 +139,8 @@
             z-index: 3;
             transition: transform 0.15s ease;
         }
-
-        .tower:hover {
-            transform: translateY(-2px);
-        }
-        .tower:active {
-            transform: translateY(0px) scale(0.98);
-        }
-
-        /* Tower highlight ring */
+        .tower:hover { transform: translateY(-2px); }
+        .tower:active { transform: translateY(0px) scale(0.98); }
         .tower::before {
             content: '';
             position: absolute;
@@ -183,26 +155,15 @@
             z-index: 0;
             pointer-events: none;
         }
-
         .tower.selected::before {
             background: rgba(247, 215, 116, 0.12);
-            box-shadow:
-                0 0 30px rgba(247, 215, 116, 0.25),
-                0 0 60px rgba(247, 200, 80, 0.12);
+            box-shadow: 0 0 30px rgba(247, 215, 116, 0.25), 0 0 60px rgba(247, 200, 80, 0.12);
             animation: glowPulse 1.2s ease-in-out infinite;
         }
-
         @keyframes glowPulse {
-            0%,
-            100% {
-                box-shadow: 0 0 30px rgba(247, 215, 116, 0.25), 0 0 60px rgba(247, 200, 80, 0.12);
-            }
-            50% {
-                box-shadow: 0 0 45px rgba(247, 215, 116, 0.45), 0 0 80px rgba(247, 200, 80, 0.22);
-            }
+            0%, 100% { box-shadow: 0 0 30px rgba(247, 215, 116, 0.25), 0 0 60px rgba(247, 200, 80, 0.12); }
+            50% { box-shadow: 0 0 45px rgba(247, 215, 116, 0.45), 0 0 80px rgba(247, 200, 80, 0.22); }
         }
-
-        /* Pole */
         .pole {
             position: absolute;
             bottom: 18px;
@@ -210,12 +171,9 @@
             transform: translateX(-50%);
             width: 10px;
             height: 240px;
-            background: linear-gradient(180deg,
-                    #c4956a 0%, #8b5e3c 20%, #7a4e30 50%, #8b5e3c 80%, #6b3a2a 100%);
+            background: linear-gradient(180deg, #c4956a 0%, #8b5e3c 20%, #7a4e30 50%, #8b5e3c 80%, #6b3a2a 100%);
             border-radius: 5px 5px 3px 3px;
-            box-shadow:
-                2px 0 4px rgba(0, 0, 0, 0.3),
-                -1px 0 2px rgba(255, 255, 255, 0.05);
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.3), -1px 0 2px rgba(255, 255, 255, 0.05);
             z-index: 1;
             pointer-events: none;
         }
@@ -231,8 +189,6 @@
             border-radius: 50%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
-
-        /* Disks container */
         .disks-wrapper {
             position: absolute;
             bottom: 22px;
@@ -246,71 +202,26 @@
             pointer-events: none;
             padding-bottom: 4px;
         }
-
-        /* Individual disk */
         .disk {
             height: 28px;
             border-radius: 14px;
             cursor: pointer;
             pointer-events: auto;
-            transition:
-                transform 0.12s ease,
-                box-shadow 0.12s ease,
-                opacity 0.2s ease;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.2s ease;
             position: relative;
             flex-shrink: 0;
         }
-
         .disk:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5) !important;
         }
-
-        /* Disk colors & sizes */
-        .disk.size-1 {
-            width: 44px;
-            background: linear-gradient(180deg, #ff7b7b 0%, #e85d5d 40%, #c0392b 100%);
-            box-shadow: 0 3px 8px rgba(200, 40, 40, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 5;
-        }
-        .disk.size-2 {
-            width: 72px;
-            background: linear-gradient(180deg, #ffb347 0%, #f08c2a 40%, #c96a1a 100%);
-            box-shadow: 0 3px 8px rgba(200, 120, 30, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 4;
-        }
-        .disk.size-3 {
-            width: 100px;
-            background: linear-gradient(180deg, #f7dc6f 0%, #e5c340 40%, #b8961a 100%);
-            box-shadow: 0 3px 8px rgba(180, 140, 30, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 3;
-        }
-        .disk.size-4 {
-            width: 128px;
-            background: linear-gradient(180deg, #5dade2 0%, #3d8cc4 40%, #1e5f8a 100%);
-            box-shadow: 0 3px 8px rgba(30, 90, 140, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-        .disk.size-5 {
-            width: 156px;
-            background: linear-gradient(180deg, #a569d9 0%, #8745c0 40%, #5c2d91 100%);
-            box-shadow: 0 3px 8px rgba(90, 40, 140, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-        }
-        .disk.size-6 {
-            width: 178px;
-            background: linear-gradient(180deg, #58d68d 0%, #3cb371 40%, #1e7a45 100%);
-            box-shadow: 0 3px 8px rgba(30, 120, 60, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 0;
-        }
-        .disk.size-7 {
-            width: 196px;
-            background: linear-gradient(180deg, #f08080 0%, #d96060 40%, #a84040 100%);
-            box-shadow: 0 3px 8px rgba(160, 60, 60, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 0;
-        }
-
-        /* Disk highlight shimmer */
+        .disk.size-1 { width: 44px; background: linear-gradient(180deg, #ff7b7b 0%, #e85d5d 40%, #c0392b 100%); box-shadow: 0 3px 8px rgba(200, 40, 40, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 5; }
+        .disk.size-2 { width: 72px; background: linear-gradient(180deg, #ffb347 0%, #f08c2a 40%, #c96a1a 100%); box-shadow: 0 3px 8px rgba(200, 120, 30, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 4; }
+        .disk.size-3 { width: 100px; background: linear-gradient(180deg, #f7dc6f 0%, #e5c340 40%, #b8961a 100%); box-shadow: 0 3px 8px rgba(180, 140, 30, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 3; }
+        .disk.size-4 { width: 128px; background: linear-gradient(180deg, #5dade2 0%, #3d8cc4 40%, #1e5f8a 100%); box-shadow: 0 3px 8px rgba(30, 90, 140, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 2; }
+        .disk.size-5 { width: 156px; background: linear-gradient(180deg, #a569d9 0%, #8745c0 40%, #5c2d91 100%); box-shadow: 0 3px 8px rgba(90, 40, 140, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 1; }
+        .disk.size-6 { width: 178px; background: linear-gradient(180deg, #58d68d 0%, #3cb371 40%, #1e7a45 100%); box-shadow: 0 3px 8px rgba(30, 120, 60, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 0; }
+        .disk.size-7 { width: 196px; background: linear-gradient(180deg, #f08080 0%, #d96060 40%, #a84040 100%); box-shadow: 0 3px 8px rgba(160, 60, 60, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3); z-index: 0; }
         .disk::after {
             content: '';
             position: absolute;
@@ -323,18 +234,16 @@
             pointer-events: none;
         }
 
-        /* Buttons */
         .btn-row {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 8px;
         }
-
         .btn {
-            padding: 11px 24px;
-            font-size: 0.95rem;
+            padding: 10px 18px;
+            font-size: 0.9rem;
             font-weight: 600;
             border: none;
             border-radius: 30px;
@@ -344,46 +253,42 @@
             text-transform: uppercase;
             font-family: inherit;
         }
-
         .btn-reset {
             background: #e74c3c;
             color: #fff;
             box-shadow: 0 4px 14px rgba(231, 76, 60, 0.35);
         }
-        .btn-reset:hover {
-            background: #f05a4a;
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
-            transform: translateY(-2px);
-        }
-        .btn-reset:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
-        }
-
+        .btn-reset:hover { background: #f05a4a; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5); transform: translateY(-2px); }
+        .btn-reset:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3); }
         .btn-disks {
             background: rgba(255, 255, 255, 0.07);
             color: #ddd;
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
         }
-        .btn-disks:hover {
-            background: rgba(255, 255, 255, 0.13);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-        }
-        .btn-disks:active {
-            transform: translateY(0);
-        }
+        .btn-disks:hover { background: rgba(255, 255, 255, 0.13); border-color: rgba(255, 255, 255, 0.3); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); }
+        .btn-disks:active { transform: translateY(0); }
         .btn-disks.active-disk-btn {
             background: rgba(247, 215, 116, 0.2);
             border-color: #f7d774;
             color: #f7d774;
             box-shadow: 0 0 20px rgba(247, 215, 116, 0.25);
         }
+        .btn-highscores {
+            background: rgba(255, 255, 255, 0.07);
+            color: #a0d9f0;
+            border: 1px solid rgba(160, 217, 240, 0.25);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        }
+        .btn-highscores:hover {
+            background: rgba(160, 217, 240, 0.12);
+            border-color: #a0d9f0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
 
-        /* Win overlay */
-        .win-overlay {
+        /* Modals */
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -396,60 +301,35 @@
             z-index: 100;
             animation: fadeIn 0.3s ease;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .win-modal {
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal {
             background: var(--surface);
             border-radius: 20px;
-            padding: 35px 30px;
-            text-align: center;
+            padding: 30px 28px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(247, 215, 116, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 420px;
+            max-width: 480px;
             width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
         }
-
         @keyframes bounceIn {
-            0% {
-                transform: scale(0.7);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+            0% { transform: scale(0.7); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
-
         .win-icon {
-            font-size: 4rem;
+            font-size: 3.5rem;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             animation: floatIcon 2s ease-in-out infinite;
         }
-
         @keyframes floatIcon {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-
         .win-title {
             font-size: 1.8rem;
             font-weight: 700;
@@ -459,265 +339,287 @@
         .win-stats {
             color: #ccc;
             font-size: 1rem;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.6;
         }
-        .win-stats strong {
-            color: #fff;
-            font-size: 1.1em;
+        .input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
         }
-
-        .btn-play-again {
+        .name-input {
+            padding: 10px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            text-align: center;
+            width: 180px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .name-input:focus { border-color: #f7d774; }
+        .btn-save {
             background: linear-gradient(135deg, #f7d774, #e5b840);
             color: #1a1a2e;
             font-weight: 700;
-            font-size: 1rem;
-            padding: 13px 30px;
+            padding: 10px 22px;
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            letter-spacing: 0.03em;
-            box-shadow: 0 6px 20px rgba(247, 200, 80, 0.4);
-            transition: all 0.2s ease;
             font-family: inherit;
+            box-shadow: 0 4px 14px rgba(247, 200, 80, 0.35);
+            transition: all 0.2s;
         }
-        .btn-play-again:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(247, 200, 80, 0.55);
+        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(247, 200, 80, 0.5); }
+        .btn-save:active { transform: translateY(0); }
+
+        .btn-close {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ccc;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 10px;
         }
-        .btn-play-again:active {
-            transform: translateY(0);
+        .btn-close:hover { background: rgba(255, 255, 255, 0.05); }
+
+        /* High scores table */
+        .highscore-header {
+            font-size: 1.4rem;
+            color: #f7d774;
+            margin-bottom: 10px;
+        }
+        .filter-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .filter-label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        .filter-select {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .scores-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        .scores-table th {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 6px;
+            color: #f0c060;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scores-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: #ddd;
+        }
+        .no-scores {
+            color: #888;
+            font-style: italic;
+            padding: 20px 0;
         }
 
-        /* Error shake */
         .shake {
             animation: shake 0.45s ease;
         }
         @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            15% {
-                transform: translateX(-8px);
-            }
-            30% {
-                transform: translateX(8px);
-            }
-            45% {
-                transform: translateX(-6px);
-            }
-            60% {
-                transform: translateX(6px);
-            }
-            75% {
-                transform: translateX(-3px);
-            }
-            90% {
-                transform: translateX(3px);
-            }
+            0%, 100% { transform: translateX(0); }
+            15% { transform: translateX(-8px); }
+            30% { transform: translateX(8px); }
+            45% { transform: translateX(-6px); }
+            60% { transform: translateX(6px); }
+            75% { transform: translateX(-3px); }
+            90% { transform: translateX(3px); }
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
-            .game-wrapper {
-                padding: 20px 12px 16px;
-                border-radius: 16px;
-            }
-            .game-title {
-                font-size: 1.5rem;
-            }
-            .game-area {
-                height: 260px;
-                padding: 0 2px;
-            }
-            .pole {
-                height: 190px;
-                width: 8px;
-            }
-            .disk {
-                height: 22px;
-                border-radius: 11px;
-            }
-            .disk.size-1 {
-                width: 34px;
-            }
-            .disk.size-2 {
-                width: 56px;
-            }
-            .disk.size-3 {
-                width: 78px;
-            }
-            .disk.size-4 {
-                width: 100px;
-            }
-            .disk.size-5 {
-                width: 122px;
-            }
-            .disk.size-6 {
-                width: 140px;
-            }
-            .disk.size-7 {
-                width: 154px;
-            }
-            .disks-wrapper {
-                gap: 2px;
-                bottom: 20px;
-            }
-            .base-platform {
-                height: 14px;
-                border-radius: 7px 7px 4px 4px;
-            }
-            .stat-item {
-                padding: 8px 14px;
-                gap: 5px;
-            }
-            .stat-value {
-                font-size: 1.1rem;
-            }
-            .btn {
-                padding: 9px 16px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .game-area {
-                height: 220px;
-            }
-            .pole {
-                height: 155px;
-                width: 7px;
-            }
-            .disk {
-                height: 18px;
-                border-radius: 9px;
-            }
-            .disk.size-1 {
-                width: 28px;
-            }
-            .disk.size-2 {
-                width: 46px;
-            }
-            .disk.size-3 {
-                width: 64px;
-            }
-            .disk.size-4 {
-                width: 82px;
-            }
-            .disk.size-5 {
-                width: 100px;
-            }
-            .disk.size-6 {
-                width: 114px;
-            }
-            .disk.size-7 {
-                width: 124px;
-            }
-            .disks-wrapper {
-                gap: 1px;
-                bottom: 16px;
-            }
-            .base-platform {
-                height: 10px;
-                border-radius: 5px 5px 3px 3px;
-            }
-            .game-title {
-                font-size: 1.25rem;
-            }
-            .stats-bar {
-                gap: 10px;
-            }
+            .game-wrapper { padding: 20px 12px 16px; border-radius: 16px; }
+            .game-title { font-size: 1.5rem; }
+            .game-area { height: 260px; padding: 0 2px; }
+            .pole { height: 190px; width: 8px; }
+            .disk { height: 22px; border-radius: 11px; }
+            .disk.size-1 { width: 34px; } .disk.size-2 { width: 56px; } .disk.size-3 { width: 78px; }
+            .disk.size-4 { width: 100px; } .disk.size-5 { width: 122px; } .disk.size-6 { width: 140px; } .disk.size-7 { width: 154px; }
+            .disks-wrapper { gap: 2px; bottom: 20px; }
+            .base-platform { height: 14px; border-radius: 7px 7px 4px 4px; }
+            .stat-item { padding: 8px 14px; gap: 5px; }
+            .stat-value { font-size: 1.1rem; }
+            .btn { padding: 9px 16px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="game-wrapper" id="gameWrapper">
-        <!-- Header -->
         <div class="game-header">
             <h1 class="game-title">🏯 Tower of Hanoi</h1>
             <p class="game-subtitle">Move all disks to the rightmost peg</p>
         </div>
 
-        <!-- Stats -->
         <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-icon">👆</span>
-                <span class="stat-label">Moves</span>
-                <span class="stat-value" id="moveCount">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-icon">🎯</span>
-                <span class="stat-label">Min</span>
-                <span class="stat-value" id="minMoves">—</span>
-            </div>
+            <div class="stat-item"><span class="stat-icon">👆</span><span class="stat-label">Moves</span><span class="stat-value" id="moveCount">0</span></div>
+            <div class="stat-item"><span class="stat-icon">🎯</span><span class="stat-label">Min</span><span class="stat-value" id="minMoves">—</span></div>
         </div>
 
-        <!-- Game Area -->
         <div class="game-area" id="gameArea">
-            <!-- Towers generated by JS -->
             <div class="base-platform"></div>
         </div>
 
-        <!-- Buttons -->
         <div class="btn-row">
-            <button class="btn btn-reset" id="btnReset" title="Reset game">🔄 Reset</button>
-            <button class="btn btn-disks active-disk-btn" data-count="3" title="3 disks">3 Disks</button>
-            <button class="btn btn-disks" data-count="4" title="4 disks">4 Disks</button>
-            <button class="btn btn-disks" data-count="5" title="5 disks">5 Disks</button>
-            <button class="btn btn-disks" data-count="6" title="6 disks">6 Disks</button>
-            <button class="btn btn-disks" data-count="7" title="7 disks">7 Disks</button>
+            <button class="btn btn-reset" id="btnReset">🔄 Reset</button>
+            <button class="btn btn-highscores" id="btnHighScores">🏆 Scores</button>
+            <button class="btn btn-disks active-disk-btn" data-count="3">3</button>
+            <button class="btn btn-disks" data-count="4">4</button>
+            <button class="btn btn-disks" data-count="5">5</button>
+            <button class="btn btn-disks" data-count="6">6</button>
+            <button class="btn btn-disks" data-count="7">7</button>
         </div>
     </div>
 
-    <!-- Win overlay (hidden by default) -->
-    <div class="win-overlay" id="winOverlay" style="display: none;">
-        <div class="win-modal">
+    <!-- Win overlay -->
+    <div class="overlay" id="winOverlay" style="display: none;">
+        <div class="modal">
             <span class="win-icon">🏆</span>
             <div class="win-title">Congratulations!</div>
-            <div class="win-stats" id="winStats">
-                You solved it in <strong>0</strong> moves!
+            <div class="win-stats" id="winStats"></div>
+            <div class="input-group">
+                <input type="text" class="name-input" id="playerNameInput" placeholder="Your name" maxlength="20">
+                <button class="btn-save" id="btnSaveScore">💾 Save Score</button>
             </div>
-            <button class="btn-play-again" id="btnPlayAgain">🎮 Play Again</button>
+            <button class="btn-close" id="btnPlayAgain">🎮 Play Again</button>
+        </div>
+    </div>
+
+    <!-- High Scores overlay -->
+    <div class="overlay" id="highScoreOverlay" style="display: none;">
+        <div class="modal" style="max-width: 500px;">
+            <div class="highscore-header">🏅 High Scores</div>
+            <div class="filter-row">
+                <span class="filter-label">Disks:</span>
+                <select class="filter-select" id="scoreFilterDisk">
+                    <option value="3">3 disks</option>
+                    <option value="4">4 disks</option>
+                    <option value="5" selected>5 disks</option>
+                    <option value="6">6 disks</option>
+                    <option value="7">7 disks</option>
+                </select>
+            </div>
+            <div id="scoresTableContainer">
+                <table class="scores-table">
+                    <thead><tr><th>Rank</th><th>Name</th><th>Moves</th><th>Date</th></tr></thead>
+                    <tbody id="scoresBody"></tbody>
+                </table>
+                <p class="no-scores" id="noScoresMsg" style="display:none;">No scores yet. Be the first!</p>
+            </div>
+            <button class="btn-close" id="btnCloseScores">Close</button>
         </div>
     </div>
 
     <script>
         (function() {
-            // === DOM Elements ===
+            // DOM elements
             const gameArea = document.getElementById('gameArea');
             const moveCountEl = document.getElementById('moveCount');
             const minMovesEl = document.getElementById('minMoves');
             const winOverlay = document.getElementById('winOverlay');
             const winStats = document.getElementById('winStats');
-            const btnReset = document.getElementById('btnReset');
+            const playerNameInput = document.getElementById('playerNameInput');
+            const btnSaveScore = document.getElementById('btnSaveScore');
             const btnPlayAgain = document.getElementById('btnPlayAgain');
+            const btnReset = document.getElementById('btnReset');
+            const btnHighScores = document.getElementById('btnHighScores');
+            const highScoreOverlay = document.getElementById('highScoreOverlay');
+            const scoreFilterDisk = document.getElementById('scoreFilterDisk');
+            const scoresBody = document.getElementById('scoresBody');
+            const noScoresMsg = document.getElementById('noScoresMsg');
+            const btnCloseScores = document.getElementById('btnCloseScores');
             const diskButtons = document.querySelectorAll('.btn-disks');
-            const gameWrapper = document.getElementById('gameWrapper');
 
-            // === Game State ===
+            // Game state
             let numDisks = 5;
-            let pegs = [
-                [],
-                [],
-                []
-            ]; // pegs[0] = left, pegs[1] = middle, pegs[2] = right
-            let selectedPeg = null; // index of selected peg, or null
+            let pegs = [[], [], []];
+            let selectedPeg = null;
             let moveCount = 0;
             let gameWon = false;
 
-            // === Initialize ===
-            function initGame() {
-                // Create disks array on peg 0
-                pegs = [
-                    [],
-                    [],
-                    []
-                ];
-                for (let i = numDisks; i >= 1; i--) {
-                    pegs[0].push(i);
+            const STORAGE_KEY = 'towerHanoiHighScores';
+
+            // --- High Score storage ---
+            function loadScores() {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            }
+
+            function saveScores(scores) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+            }
+
+            function addScore(name, moves, disks) {
+                const scores = loadScores();
+                scores.push({
+                    name: name.trim(),
+                    moves: moves,
+                    disks: disks,
+                    date: new Date().toISOString().slice(0, 10)
+                });
+                saveScores(scores);
+            }
+
+            function getScoresForDisks(disks) {
+                const scores = loadScores();
+                return scores
+                    .filter(s => s.disks === disks)
+                    .sort((a, b) => a.moves - b.moves || a.date.localeCompare(b.date));
+            }
+
+            // --- Render high score table ---
+            function renderHighScoreTable() {
+                const filterDisks = parseInt(scoreFilterDisk.value);
+                const filtered = getScoresForDisks(filterDisks);
+                scoresBody.innerHTML = '';
+                if (filtered.length === 0) {
+                    noScoresMsg.style.display = 'block';
+                } else {
+                    noScoresMsg.style.display = 'none';
+                    filtered.slice(0, 10).forEach((entry, idx) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `<td>${idx+1}</td><td>${escapeHtml(entry.name)}</td><td>${entry.moves}</td><td>${entry.date}</td>`;
+                        scoresBody.appendChild(row);
+                    });
                 }
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // --- Game logic ---
+            function initGame() {
+                pegs = [[], [], []];
+                for (let i = numDisks; i >= 1; i--) pegs[0].push(i);
                 moveCount = 0;
                 selectedPeg = null;
                 gameWon = false;
@@ -729,100 +631,67 @@
 
             function updateMoveDisplay() {
                 moveCountEl.textContent = moveCount;
-                // Remove pulse class and re-add to trigger animation
                 moveCountEl.classList.remove('pulse');
-                void moveCountEl.offsetWidth; // reflow
-                if (moveCount > 0) {
-                    moveCountEl.classList.add('pulse');
-                }
+                void moveCountEl.offsetWidth;
+                if (moveCount > 0) moveCountEl.classList.add('pulse');
             }
 
             function updateMinMovesDisplay() {
-                const min = Math.pow(2, numDisks) - 1;
-                minMovesEl.textContent = min;
+                minMovesEl.textContent = Math.pow(2, numDisks) - 1;
             }
 
-            // === Rendering ===
             function renderAll() {
-                // Clear game area (keep base platform)
                 const basePlatform = gameArea.querySelector('.base-platform');
                 gameArea.innerHTML = '';
-                if (basePlatform) {
-                    // We'll re-add it
-                }
-
-                // Create towers
-                for (let pegIndex = 0; pegIndex < 3; pegIndex++) {
+                for (let i = 0; i < 3; i++) {
                     const tower = document.createElement('div');
-                    tower.className = 'tower';
-                    if (pegIndex === selectedPeg) {
-                        tower.classList.add('selected');
-                    }
-                    tower.dataset.pegIndex = pegIndex;
-                    tower.addEventListener('click', () => onTowerClick(pegIndex));
+                    tower.className = 'tower' + (i === selectedPeg ? ' selected' : '');
+                    tower.dataset.pegIndex = i;
+                    tower.addEventListener('click', () => onTowerClick(i));
 
-                    // Pole
                     const pole = document.createElement('div');
                     pole.className = 'pole';
                     tower.appendChild(pole);
 
-                    // Disks wrapper
-                    const disksWrapper = document.createElement('div');
-                    disksWrapper.className = 'disks-wrapper';
-
-                    // Add disks (bottom to top in array order)
-                    const pegDisks = pegs[pegIndex];
-                    for (let i = 0; i < pegDisks.length; i++) {
-                        const diskSize = pegDisks[i];
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'disks-wrapper';
+                    pegs[i].forEach(size => {
                         const disk = document.createElement('div');
-                        disk.className = `disk size-${diskSize}`;
-                        disk.dataset.size = diskSize;
-                        disksWrapper.appendChild(disk);
-                    }
-
-                    tower.appendChild(disksWrapper);
+                        disk.className = `disk size-${size}`;
+                        wrapper.appendChild(disk);
+                    });
+                    tower.appendChild(wrapper);
                     gameArea.appendChild(tower);
                 }
-
-                // Re-add base platform
                 const bp = document.createElement('div');
                 bp.className = 'base-platform';
                 gameArea.appendChild(bp);
             }
 
-            // === Game Logic ===
             function onTowerClick(pegIndex) {
                 if (gameWon) return;
-
                 if (selectedPeg === null) {
-                    // Try to select this peg
                     if (pegs[pegIndex].length > 0) {
                         selectedPeg = pegIndex;
                         renderAll();
                     }
                 } else if (selectedPeg === pegIndex) {
-                    // Deselect
                     selectedPeg = null;
                     renderAll();
                 } else {
-                    // Attempt move from selectedPeg to pegIndex
-                    const fromPeg = selectedPeg;
-                    const toPeg = pegIndex;
-                    const diskToMove = pegs[fromPeg][pegs[fromPeg].length - 1]; // top disk
-                    const topDiskOnTarget = pegs[toPeg].length > 0 ? pegs[toPeg][pegs[toPeg].length - 1] :
-                        null;
-
-                    if (topDiskOnTarget === null || diskToMove < topDiskOnTarget) {
-                        // Valid move
-                        pegs[fromPeg].pop();
-                        pegs[toPeg].push(diskToMove);
+                    const from = selectedPeg;
+                    const to = pegIndex;
+                    const disk = pegs[from][pegs[from].length-1];
+                    const topTarget = pegs[to].length ? pegs[to][pegs[to].length-1] : null;
+                    if (topTarget === null || disk < topTarget) {
+                        pegs[from].pop();
+                        pegs[to].push(disk);
                         moveCount++;
                         updateMoveDisplay();
                         selectedPeg = null;
                         renderAll();
                         checkWin();
                     } else {
-                        // Invalid move - shake the target tower and deselect
                         selectedPeg = null;
                         renderAll();
                         shakeTower(pegIndex);
@@ -830,45 +699,29 @@
                 }
             }
 
-            function shakeTower(pegIndex) {
+            function shakeTower(idx) {
                 const towers = gameArea.querySelectorAll('.tower');
-                if (towers[pegIndex]) {
-                    towers[pegIndex].classList.add('shake');
-                    setTimeout(() => {
-                        towers[pegIndex].classList.remove('shake');
-                    }, 450);
+                if (towers[idx]) {
+                    towers[idx].classList.add('shake');
+                    setTimeout(() => towers[idx].classList.remove('shake'), 450);
                 }
             }
 
             function checkWin() {
-                // Win condition: all disks on peg index 2 (rightmost peg)
                 if (pegs[2].length === numDisks) {
                     gameWon = true;
-                    const minMoves = Math.pow(2, numDisks) - 1;
-                    setTimeout(() => {
-                        showWinOverlay();
-                    }, 400);
+                    setTimeout(() => showWinOverlay(), 400);
                 }
             }
 
             function showWinOverlay() {
-                const minMoves = Math.pow(2, numDisks) - 1;
-                let efficiencyText = '';
-                if (moveCount === minMoves) {
-                    efficiencyText =
-                        '<br><span style="color:#f7d774;">⭐ Perfect! That\'s the minimum possible moves!</span>';
-                } else if (moveCount <= minMoves * 1.5) {
-                    efficiencyText =
-                        '<br><span style="color:#a0d9f0;">👍 Great job! Close to optimal.</span>';
-                } else {
-                    efficiencyText =
-                        '<br><span style="color:#ccc;">You did it! Can you do it in fewer moves?</span>';
-                }
-                winStats.innerHTML = `
-                    You solved <strong>${numDisks}</strong> disks in <strong>${moveCount}</strong> moves!
-                    <br><span style="color:#999;">Minimum possible: ${minMoves} moves</span>
-                    ${efficiencyText}
-                `;
+                const min = Math.pow(2, numDisks) - 1;
+                let eff = '';
+                if (moveCount === min) eff = '<br><span style="color:#f7d774;">⭐ Perfect!</span>';
+                else if (moveCount <= min * 1.5) eff = '<br><span style="color:#a0d9f0;">👍 Great job!</span>';
+                else eff = '<br><span style="color:#ccc;">You did it! Try fewer moves?</span>';
+                winStats.innerHTML = `Solved <strong>${numDisks}</strong> disks in <strong>${moveCount}</strong> moves! (min ${min})${eff}`;
+                playerNameInput.value = '';
                 winOverlay.style.display = 'flex';
             }
 
@@ -876,29 +729,52 @@
                 winOverlay.style.display = 'none';
             }
 
-            // === Event Listeners ===
-            btnReset.addEventListener('click', () => {
-                initGame();
-            });
+            // --- Event listeners ---
+            btnReset.addEventListener('click', initGame);
+            btnPlayAgain.addEventListener('click', initGame);
 
-            btnPlayAgain.addEventListener('click', () => {
-                initGame();
-            });
-
-            // Close win overlay by clicking outside modal
-            winOverlay.addEventListener('click', (e) => {
-                if (e.target === winOverlay) {
-                    hideWinOverlay();
+            btnSaveScore.addEventListener('click', () => {
+                const name = playerNameInput.value.trim();
+                if (!name) {
+                    alert('Please enter a name.');
+                    return;
                 }
+                addScore(name, moveCount, numDisks);
+                // Update high score table if visible
+                if (highScoreOverlay.style.display === 'flex') {
+                    renderHighScoreTable();
+                }
+                // Show feedback
+                btnSaveScore.textContent = '✅ Saved!';
+                setTimeout(() => { btnSaveScore.textContent = '💾 Save Score'; }, 2000);
             });
+
+            winOverlay.addEventListener('click', (e) => {
+                if (e.target === winOverlay) hideWinOverlay();
+            });
+
+            // High Scores button & modal
+            btnHighScores.addEventListener('click', () => {
+                scoreFilterDisk.value = numDisks;
+                renderHighScoreTable();
+                highScoreOverlay.style.display = 'flex';
+            });
+
+            btnCloseScores.addEventListener('click', () => {
+                highScoreOverlay.style.display = 'none';
+            });
+            highScoreOverlay.addEventListener('click', (e) => {
+                if (e.target === highScoreOverlay) highScoreOverlay.style.display = 'none';
+            });
+
+            scoreFilterDisk.addEventListener('change', renderHighScoreTable);
 
             // Disk count buttons
             diskButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const count = parseInt(btn.dataset.count);
-                    if (count === numDisks) return; // already selected
+                    if (count === numDisks) return;
                     numDisks = count;
-                    // Update active button styling
                     diskButtons.forEach(b => b.classList.remove('active-disk-btn'));
                     btn.classList.add('active-disk-btn');
                     initGame();
@@ -907,49 +783,24 @@
 
             // Keyboard shortcuts
             document.addEventListener('keydown', (e) => {
-                if (gameWon && e.key === 'Enter') {
-                    initGame();
+                if (e.key === 'Escape') {
+                    if (highScoreOverlay.style.display === 'flex') highScoreOverlay.style.display = 'none';
+                    else if (winOverlay.style.display === 'flex') hideWinOverlay();
+                    else { selectedPeg = null; renderAll(); }
                     return;
                 }
+                if (gameWon && e.key === 'Enter') { initGame(); return; }
                 if (gameWon) return;
-
-                switch (e.key.toLowerCase()) {
-                    case '1':
-                    case 'a':
-                        onTowerClick(0);
-                        break;
-                    case '2':
-                    case 's':
-                        onTowerClick(1);
-                        break;
-                    case '3':
-                    case 'd':
-                        onTowerClick(2);
-                        break;
-                    case 'r':
-                        initGame();
-                        break;
-                    case 'escape':
-                        selectedPeg = null;
-                        renderAll();
-                        break;
-                    default:
-                        break;
-                }
+                if (e.key === '1' || e.key === 'a') onTowerClick(0);
+                else if (e.key === '2' || e.key === 's') onTowerClick(1);
+                else if (e.key === '3' || e.key === 'd') onTowerClick(2);
+                else if (e.key === 'r' || e.key === 'R') initGame();
             });
 
-            // === Start the game ===
-            // Set initial active disk button
-            const initialDiskBtn = document.querySelector(`.btn-disks[data-count="${numDisks}"]`);
-            if (initialDiskBtn) {
-                initialDiskBtn.classList.add('active-disk-btn');
-            }
+            // Initialize
+            document.querySelector(`.btn-disks[data-count="${numDisks}"]`).classList.add('active-disk-btn');
             initGame();
-
-            console.log('🏯 Tower of Hanoi ready!');
-            console.log('   Click a tower to select, then click another to move.');
-            console.log('   Keyboard: 1/2/3 or A/S/D to select towers, R to reset, Esc to deselect.');
-            console.log(`   ${numDisks} disks | Minimum moves: ${Math.pow(2, numDisks) - 1}`);
+            console.log('🏯 Tower of Hanoi with high scores ready!');
         })();
     </script>
 </body>
